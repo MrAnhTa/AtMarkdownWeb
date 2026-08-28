@@ -1,0 +1,47 @@
+export const localeCodes = {
+  vi: 'vi-VN',
+  en: 'en-US',
+  fr: 'fr-FR',
+}
+
+export const translations = {
+  vi: {
+    input: 'INPUT', editor: 'Markdown Editor', saved: 'Đã lưu', saving: 'Đang lưu',
+    collapseInput: 'Thu gọn panel Input', showInput: 'Hiện Input', openFile: 'Mở file',
+    sample: 'Mẫu', clear: 'Xóa nội dung', placeholder: '# Dán nội dung Markdown của bạn tại đây…',
+    markdownContent: 'Nội dung Markdown', characters: 'ký tự', words: 'từ', resizeInput: 'Thay đổi độ rộng panel Input', resizeOutline: 'Thay đổi độ rộng Mục lục',
+    preview: 'BẢN XEM TRƯỚC', fullscreen: 'Toàn màn hình', exitFullscreen: 'Thu nhỏ', openFullscreen: 'Mở toàn màn hình',
+    closeFullscreen: 'Thoát toàn màn hình', outline: 'Mục lục', content: 'NỘI DUNG', outlineLabel: 'Mục lục tài liệu',
+    outlineEmpty: 'Thêm heading để tạo mục lục.', emptyTitle: 'Bắt đầu với Markdown',
+    emptyBody: 'Dán nội dung hoặc mở một file ở panel bên trái.', increaseFont: 'Tăng cỡ chữ', decreaseFont: 'Giảm cỡ chữ',
+    language: 'Ngôn ngữ', copy: 'Sao chép', copied: 'Đã chép', copyCode: 'Sao chép đoạn code',
+    alertNote: 'Ghi chú', alertTip: 'Mẹo', alertImportant: 'Quan trọng', alertWarning: 'Cảnh báo', alertCaution: 'Thận trọng',
+    mermaidInvalid: 'Mermaid không hợp lệ', mermaidError: 'Không thể render sơ đồ Mermaid.', mermaidLoading: 'Đang vẽ sơ đồ…', mermaidLabel: 'Sơ đồ Mermaid',
+  },
+  en: {
+    input: 'INPUT', editor: 'Markdown Editor', saved: 'Saved', saving: 'Saving',
+    collapseInput: 'Collapse Input panel', showInput: 'Show Input', openFile: 'Open file',
+    sample: 'Sample', clear: 'Clear content', placeholder: '# Paste your Markdown content here…',
+    markdownContent: 'Markdown content', characters: 'characters', words: 'words', resizeInput: 'Resize Input panel', resizeOutline: 'Resize Outline panel',
+    preview: 'PREVIEW', fullscreen: 'Fullscreen', exitFullscreen: 'Minimize', openFullscreen: 'Open fullscreen',
+    closeFullscreen: 'Exit fullscreen', outline: 'Outline', content: 'CONTENTS', outlineLabel: 'Document outline',
+    outlineEmpty: 'Add headings to create an outline.', emptyTitle: 'Start with Markdown',
+    emptyBody: 'Paste content or open a file in the left panel.', increaseFont: 'Increase font size', decreaseFont: 'Decrease font size',
+    language: 'Language', copy: 'Copy', copied: 'Copied', copyCode: 'Copy code block',
+    alertNote: 'Note', alertTip: 'Tip', alertImportant: 'Important', alertWarning: 'Warning', alertCaution: 'Caution',
+    mermaidInvalid: 'Invalid Mermaid diagram', mermaidError: 'Unable to render Mermaid diagram.', mermaidLoading: 'Drawing diagram…', mermaidLabel: 'Mermaid diagram',
+  },
+  fr: {
+    input: 'SAISIE', editor: 'Éditeur Markdown', saved: 'Enregistré', saving: 'Enregistrement',
+    collapseInput: 'Réduire le panneau de saisie', showInput: 'Afficher la saisie', openFile: 'Ouvrir',
+    sample: 'Exemple', clear: 'Effacer le contenu', placeholder: '# Collez votre contenu Markdown ici…',
+    markdownContent: 'Contenu Markdown', characters: 'caractères', words: 'mots', resizeInput: 'Redimensionner le panneau de saisie', resizeOutline: 'Redimensionner le sommaire',
+    preview: 'APERÇU', fullscreen: 'Plein écran', exitFullscreen: 'Réduire', openFullscreen: 'Ouvrir en plein écran',
+    closeFullscreen: 'Quitter le plein écran', outline: 'Sommaire', content: 'CONTENU', outlineLabel: 'Sommaire du document',
+    outlineEmpty: 'Ajoutez des titres pour créer un sommaire.', emptyTitle: 'Commencez avec Markdown',
+    emptyBody: 'Collez du contenu ou ouvrez un fichier dans le panneau gauche.', increaseFont: 'Agrandir le texte', decreaseFont: 'Réduire le texte',
+    language: 'Langue', copy: 'Copier', copied: 'Copié', copyCode: 'Copier le bloc de code',
+    alertNote: 'Note', alertTip: 'Conseil', alertImportant: 'Important', alertWarning: 'Avertissement', alertCaution: 'Attention',
+    mermaidInvalid: 'Diagramme Mermaid invalide', mermaidError: 'Impossible de générer le diagramme Mermaid.', mermaidLoading: 'Création du diagramme…', mermaidLabel: 'Diagramme Mermaid',
+  },
+}
