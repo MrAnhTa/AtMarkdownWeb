@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import MarkdownPreview from './components/MarkdownPreview.jsx'
 import { localeCodes, translations } from './lib/i18n.js'
 import { extractHeadings } from './lib/markdown.js'
-import { sampleMarkdown } from './sampleMarkdown.js'
+import { getSampleMarkdown } from './sampleMarkdown.js'
 
 const storageKey = 'atmarkdown-web-content-v1'
 
@@ -26,11 +26,11 @@ function Icon({ name }) {
   return <svg className="ui-icon" viewBox="0 0 24 24" aria-hidden="true">{paths[name]}</svg>
 }
 
-function initialContent() {
+function initialContent(locale) {
   try {
-    return localStorage.getItem(storageKey) || sampleMarkdown
+    return localStorage.getItem(storageKey) || getSampleMarkdown(locale)
   } catch {
-    return sampleMarkdown
+    return getSampleMarkdown(locale)
   }
 }
 
@@ -61,7 +61,8 @@ function initialLocale() {
 }
 
 export default function App() {
-  const [content, setContent] = useState(initialContent)
+  const [locale, setLocale] = useState(initialLocale)
+  const [content, setContent] = useState(() => initialContent(locale))
   const [saved, setSaved] = useState(true)
   const [outlineOpen, setOutlineOpen] = useState(() => window.matchMedia('(min-width: 821px)').matches)
   const [editorWidth, setEditorWidth] = useState(initialEditorWidth)
@@ -69,7 +70,6 @@ export default function App() {
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [fontScale, setFontScale] = useState(() => storedNumber('atmarkdown-font-scale', 1))
   const [outlineWidth, setOutlineWidth] = useState(() => storedNumber('atmarkdown-outline-width', 210))
-  const [locale, setLocale] = useState(initialLocale)
   const fileInput = useRef(null)
   const workspaceRef = useRef(null)
   const previewRef = useRef(null)
@@ -212,7 +212,7 @@ export default function App() {
           </div>
           <div className="editor-toolbar">
             <button type="button" onClick={() => fileInput.current?.click()}><Icon name="upload" />{labels.openFile}</button>
-            <button type="button" onClick={() => setContent(sampleMarkdown)}><Icon name="sparkle" />{labels.sample}</button>
+            <button type="button" onClick={() => setContent(getSampleMarkdown(locale))}><Icon name="sparkle" />{labels.sample}</button>
             <button className="danger-button" type="button" onClick={() => setContent('')} aria-label={labels.clear} title={labels.clear}><Icon name="trash" /></button>
             <input ref={fileInput} type="file" accept=".md,.markdown,.mdown,.mkd,text/markdown,text/plain" hidden onChange={(event) => readFile(event.target.files?.[0])} />
           </div>
