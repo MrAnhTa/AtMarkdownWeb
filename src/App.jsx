@@ -5,6 +5,15 @@ import { extractHeadings } from './lib/markdown.js'
 import { getSampleMarkdown } from './sampleMarkdown.js'
 
 const storageKey = 'atmarkdown-web-content-v1'
+const themeStorageKey = 'atmarkdown-theme'
+
+function initialTheme() {
+  try {
+    return localStorage.getItem(themeStorageKey) === 'light' ? 'light' : 'dark'
+  } catch {
+    return 'dark'
+  }
+}
 
 function Icon({ name }) {
   const paths = {
@@ -22,6 +31,8 @@ function Icon({ name }) {
     minus: <path d="M5 12h14"/>,
     plus: <><path d="M5 12h14M12 5v14"/></>,
     globe: <><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></>,
+    sun: <><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/></>,
+    moon: <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/>,
   }
   return <svg className="ui-icon" viewBox="0 0 24 24" aria-hidden="true">{paths[name]}</svg>
 }
@@ -61,6 +72,7 @@ function initialLocale() {
 }
 
 export default function App() {
+  const [theme, setTheme] = useState(initialTheme)
   const [locale, setLocale] = useState(initialLocale)
   const [content, setContent] = useState(() => initialContent(locale))
   const [saved, setSaved] = useState(true)
@@ -77,6 +89,12 @@ export default function App() {
   const headings = useMemo(() => extractHeadings(content), [content])
   const labels = translations[locale]
   const words = useMemo(() => content.trim() ? content.trim().split(/\s+/).length : 0, [content])
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'light' ? '#eef4fb' : '#07142f')
+    try { localStorage.setItem(themeStorageKey, theme) } catch { /* optional preference */ }
+  }, [theme])
 
   useEffect(() => {
     setSaved(false)
@@ -270,6 +288,7 @@ export default function App() {
               </div>
             </div>
             <div className="preview-actions">
+              <button className="theme-toggle" type="button" onClick={() => setTheme((current) => current === 'dark' ? 'light' : 'dark')} title={theme === 'dark' ? labels.switchToLight : labels.switchToDark} aria-label={theme === 'dark' ? labels.switchToLight : labels.switchToDark}><Icon name={theme === 'dark' ? 'sun' : 'moon'} /></button>
               <label className="language-select" title={labels.language}><Icon name="globe" /><select value={locale} onChange={(event) => setLocale(event.target.value)} aria-label={labels.language}><option value="vi">VI</option><option value="en">EN</option><option value="fr">FR</option></select></label>
               {editorCollapsed && <button type="button" onClick={() => setEditorCollapsed(false)} title={labels.showInput}><Icon name="expand" /><span>{labels.showInput}</span></button>}
               <button type="button" onClick={toggleFullscreen} title={isFullscreen ? labels.closeFullscreen : labels.openFullscreen}><Icon name={isFullscreen ? 'minimize' : 'fullscreen'} /><span>{isFullscreen ? labels.exitFullscreen : labels.fullscreen}</span></button>
@@ -311,7 +330,7 @@ export default function App() {
               onKeyDown={resizeOutlineWithKeyboard}
             ><span /></div>
             <div className="preview-scroll">
-              {content.trim() ? <MarkdownPreview content={content} labels={labels} /> : (
+              {content.trim() ? <MarkdownPreview content={content} labels={labels} theme={theme} /> : (
                 <div className="empty-state"><Icon name="file" /><h2>{labels.emptyTitle}</h2><p>{labels.emptyBody}</p></div>
               )}
             </div>

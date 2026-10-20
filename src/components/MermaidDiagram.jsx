@@ -3,7 +3,7 @@ import { useEffect, useId, useState } from 'react'
 let renderSequence = 0
 let renderQueue = Promise.resolve()
 
-export default function MermaidDiagram({ chart, labels }) {
+export default function MermaidDiagram({ chart, labels, theme }) {
   const reactId = useId()
   const [result, setResult] = useState({ svg: '', error: '' })
 
@@ -18,11 +18,23 @@ export default function MermaidDiagram({ chart, labels }) {
           mermaid.initialize({
             startOnLoad: false,
             securityLevel: 'strict',
-            theme: 'dark',
+            theme: theme === 'light' ? 'default' : 'dark',
             fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif',
             flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
             sequence: { useMaxWidth: true, wrap: true },
-            themeVariables: {
+            themeVariables: theme === 'light' ? {
+              background: '#ffffff',
+              primaryColor: '#e0f2fe',
+              primaryTextColor: '#0f172a',
+              primaryBorderColor: '#0284c7',
+              lineColor: '#0369a1',
+              secondaryColor: '#eef2ff',
+              tertiaryColor: '#f0f9ff',
+              clusterBkg: '#f1f5f9',
+              clusterBorder: '#94a3b8',
+              edgeLabelBackground: '#ffffff',
+              fontSize: '15px',
+            } : {
               background: '#08162d',
               primaryColor: '#12365f',
               primaryTextColor: '#f0f7ff',
@@ -56,7 +68,7 @@ export default function MermaidDiagram({ chart, labels }) {
       active = false
       window.clearTimeout(timeout)
     }
-  }, [chart, reactId, labels.mermaidError])
+  }, [chart, reactId, labels.mermaidError, theme])
 
   if (result.error) {
     return (

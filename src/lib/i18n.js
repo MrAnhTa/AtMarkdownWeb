@@ -6,6 +6,7 @@ export const localeCodes = {
 
 export const translations = {
   vi: {
+    switchToLight: 'Chuyển sang giao diện sáng', switchToDark: 'Chuyển sang giao diện tối',
     input: 'INPUT', editor: 'Markdown Editor', saved: 'Đã lưu', saving: 'Đang lưu',
     collapseInput: 'Thu gọn panel Input', showInput: 'Hiện Input', openFile: 'Mở file',
     sample: 'Mẫu', clear: 'Xóa nội dung', placeholder: '# Dán nội dung Markdown của bạn tại đây…',
@@ -19,6 +20,7 @@ export const translations = {
     mermaidInvalid: 'Mermaid không hợp lệ', mermaidError: 'Không thể render sơ đồ Mermaid.', mermaidLoading: 'Đang vẽ sơ đồ…', mermaidLabel: 'Sơ đồ Mermaid',
   },
   en: {
+    switchToLight: 'Switch to light theme', switchToDark: 'Switch to dark theme',
     input: 'INPUT', editor: 'Markdown Editor', saved: 'Saved', saving: 'Saving',
     collapseInput: 'Collapse Input panel', showInput: 'Show Input', openFile: 'Open file',
     sample: 'Sample', clear: 'Clear content', placeholder: '# Paste your Markdown content here…',
@@ -32,6 +34,7 @@ export const translations = {
     mermaidInvalid: 'Invalid Mermaid diagram', mermaidError: 'Unable to render Mermaid diagram.', mermaidLoading: 'Drawing diagram…', mermaidLabel: 'Mermaid diagram',
   },
   fr: {
+    switchToLight: 'Passer au thème clair', switchToDark: 'Passer au thème sombre',
     input: 'SAISIE', editor: 'Éditeur Markdown', saved: 'Enregistré', saving: 'Enregistrement',
     collapseInput: 'Réduire le panneau de saisie', showInput: 'Afficher la saisie', openFile: 'Ouvrir',
     sample: 'Exemple', clear: 'Effacer le contenu', placeholder: '# Collez votre contenu Markdown ici…',

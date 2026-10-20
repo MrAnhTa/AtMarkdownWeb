@@ -47,13 +47,13 @@ function nodeText(node) {
   return ''
 }
 
-function CodeBlock({ children, labels }) {
+function CodeBlock({ children, labels, theme }) {
   const [copied, setCopied] = useState(false)
   const child = Children.only(children)
   const language = child?.props?.className?.match(/language-([\w-]+)/)?.[1]
   const source = nodeText(child?.props?.children).replace(/\n$/, '')
 
-  if (language === 'mermaid') return <MermaidDiagram chart={source} labels={labels} />
+  if (language === 'mermaid') return <MermaidDiagram chart={source} labels={labels} theme={theme} />
 
   async function copyCode() {
     try {
@@ -78,14 +78,14 @@ function CodeBlock({ children, labels }) {
   )
 }
 
-export default function MarkdownPreview({ content, labels }) {
+export default function MarkdownPreview({ content, labels, theme }) {
   return (
     <article className="markdown-body">
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkMath, remarkAtMarkdown]}
         rehypePlugins={[rehypeRaw, [rehypeSanitize, safeHtmlSchema], rehypeKatex, rehypeHighlight]}
         components={{
-          pre: (props) => <CodeBlock {...props} labels={labels} />,
+          pre: (props) => <CodeBlock {...props} labels={labels} theme={theme} />,
           a: ({ href, children, ...props }) => (
             <a
               href={href}
